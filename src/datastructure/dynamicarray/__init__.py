@@ -23,12 +23,11 @@ class DynamicArray:
         self.n += 1
 
     def resize(self, c):
-
-        B = self. make_array(c)
-        for k in range(self. n):
-            B[k] = self. A[k]
-        self. A = B
-        self. capacity = c
+        B = self.make_array(c)
+        for k in range(self.n):
+            B[k] = self.A[k]
+        self.A = B
+        self.capacity = c
 
     def make_array(self, c):
         return (c * ctypes.py_object)()

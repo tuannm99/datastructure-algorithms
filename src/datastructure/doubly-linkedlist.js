@@ -1,3 +1,4 @@
+const t = require('')
 class Node {
     constructor(val) {
         this.val = val
@@ -69,4 +70,4 @@ class DoublyLinkedList {
     reverse() {}
 
     toArray() {}
-
+}

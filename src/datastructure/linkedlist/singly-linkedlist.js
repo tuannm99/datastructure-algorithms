@@ -62,7 +62,7 @@ class SinglyLinkedList {
     }
 
     // add first
-    unshift() {
+    unshift(val) {
         let newNode = new Node(val)
         if (!this.head) {
             this.head = newNode
@@ -175,4 +175,4 @@ linkedlist.push('you')
 // console.log(linkedlist.get(2))
 // console.log(linkedlist.get(4))
 // console.log(linkedlist.get(1))
-// linkedlist.traverse()
+linkedlist.traverse()

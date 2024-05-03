@@ -39,7 +39,28 @@ class BinarySearchTree {
         }
     }
 
-    find() {}
+    insertByRecusion(value) {
+        const recusion = (root) => {
+            if (root === null) {
+                root = new Node(value)
+                return this
+            }
+
+            if (root.value > value) {
+                root.left = recusion(root.left)
+            } else if (root.value < value) {
+                root.right = recusion(root.right)
+            }
+
+            return this
+        }
+
+        recusion(this.root)
+    }
+
+    find() {
+
+    }
 }
 
 const tree = new BinarySearchTree()

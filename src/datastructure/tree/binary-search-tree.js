@@ -57,33 +57,28 @@ class BinarySearchTree {
         this.root = recursion(this.root)
     }
 
-    delete(value) {
-        const getMin = (node) => {
-            let minv = node.key
-            while (node.left !== null) {
-                minv = node.left.key
-                node = node.left
-            }
-            return minv
+    deleteNode(root, value) {
+        if (root === null) return root
+
+        if (value < root.value) root.left = this.deleteNode(root.left, value)
+        else if (value > root.value) root.right = this.deleteNode(root.right, value)
+        else {
+            if (root.left === null) return root.right
+            else if (root.right === null) return root.left
+
+            root.value = this._getMinValue(root.right)
+            root.right = this.deleteNode(root.right, root.value)
         }
+        return root
+    }
 
-        const recursion = (node) => {
-            if (node === null) return node
-
-            if (value < node.value) {
-                node.left = recursion(root.left)
-            } else if (value > node.value) {
-                node.right = recursion(root.right)
-            } else {
-                if (node.left === null) return node.right
-                else if (node.right === null) return node.left
-
-                node.value = getMin(node.right)
-                node.right = recursion(root.right)
-            }
+    _getMinValue(node) {
+        let minv = node.value
+        while (node.left !== null) {
+            minv = node.left.value
+            node = node.left
         }
-
-        return recursion(this.root)
+        return minv
     }
 
     find() {
@@ -177,14 +172,23 @@ class BinarySearchTree {
 const tree = new BinarySearchTree()
 
 tree.insert(10)
-tree.insert(6)
-tree.insert(15)
-tree.insert(3)
+tree.insert(7)
+tree.insert(26)
+tree.insert(28)
+tree.insert(17)
+tree.insert(18)
+tree.insert(5)
 tree.insert(8)
-tree.insert(20)
+tree.insert(1)
+tree.insert(6)
 // console.log(tree.root)
-console.log(tree.bfs())
-console.log(tree.dfs_preOrder())
+// console.log(tree.bfs())
+console.log(tree.dfs_inOrder())
+// tree.delete(1)
+// tree.delete(10)
+tree.deleteNode(tree.root, 1)
+tree.deleteNode(tree.root, 10)
+console.log(tree.dfs_inOrder())
 
 // const tree2 = new BinarySearchTree()
 // tree2.insertByRecursion(1)

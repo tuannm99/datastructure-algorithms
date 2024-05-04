@@ -57,6 +57,35 @@ class BinarySearchTree {
         this.root = recursion(this.root)
     }
 
+    delete(value) {
+        const getMin = (node) => {
+            let minv = node.key
+            while (node.left !== null) {
+                minv = node.left.key
+                node = node.left
+            }
+            return minv
+        }
+
+        const recursion = (node) => {
+            if (node === null) return node
+
+            if (value < node.value) {
+                node.left = recursion(root.left)
+            } else if (value > node.value) {
+                node.right = recursion(root.right)
+            } else {
+                if (node.left === null) return node.right
+                else if (node.right === null) return node.left
+
+                node.value = getMin(node.right)
+                node.right = recursion(root.right)
+            }
+        }
+
+        return recursion(this.root)
+    }
+
     find() {
         if (this.root === null) return false
         let current = this.root,
